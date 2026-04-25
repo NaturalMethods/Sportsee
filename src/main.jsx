@@ -1,20 +1,12 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import './index.css'
-import App from './App.jsx'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from "react-router-dom"
+import Router from "./router"
 
-
-
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-      <Router>
-          <Routes>
-              <Route path="/" element={<App />} />
-              <Route path="/dashboard" element={<dashboard />} />
-              <Route path="/profile" element={<profile />} />
-              <Route path="*" element={<h1>Error</h1>} />
-          </Routes>
-      </Router>
-  </StrictMode>,
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <StrictMode>
+        <BrowserRouter>
+            <Router />
+        </BrowserRouter>
+    </StrictMode>
 )

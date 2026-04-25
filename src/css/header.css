@@ -1,0 +1,32 @@
+
+.header-container{
+
+    background-color: #F2F3FF;
+    height: fit-content;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 150px;
+}
+
+.nav-link{
+    text-decoration: none;
+}
+
+.navmenu{
+
+    align-items: center;
+    justify-content: space-between;
+
+
+
+    padding: 16px 48px;
+    gap: 10px;
+
+    width: 461px;
+    height: 49px;
+
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 40px;
+
+
+}
