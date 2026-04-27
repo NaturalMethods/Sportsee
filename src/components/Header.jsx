@@ -9,7 +9,7 @@ const Header = () => {
             <img src={logo} alt="logo" />
             <nav className="flex-row navmenu">
                 <NavLink to="/dashboard" className={({ isActive }) => isActive ? "active nav-link body blue" : "nav-link body black"}>Dashboard</NavLink>
-                <NavLink to="/profile" label className={({ isActive }) => isActive ? "active nav-link body blue" : "nav-link body black"}>Mon profil</NavLink>
+                <NavLink to="/profile" className={({ isActive }) => isActive ? "active nav-link body blue" : "nav-link body black"}>Mon profil</NavLink>
                 <label className="body black">|</label>
                 <NavLink className="nav-link body blue">Se déconnecter</NavLink>
             </nav>

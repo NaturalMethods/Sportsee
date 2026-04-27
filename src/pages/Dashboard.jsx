@@ -1,9 +1,12 @@
 import "../css/dashboard.css"
+import DashboardHeaderProfile from "../components/DashboardHeaderProfile.jsx";
+import DashboardStats from "../components/DashboardStats.jsx";
 
 const Dashboard = () => {
     return (
-        <section className="dashboard-section">
-
+        <section className="flex-col dashboard-section">
+            <DashboardHeaderProfile />
+            <DashboardStats />
         </section>
     )
 }

@@ -1,0 +1,36 @@
+.dashboard-graph{
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    gap: 24px;
+
+}
+
+.distance-graph {
+
+    padding: 16px 40px 24px;
+
+    width: 445px;
+    height: 484px;
+
+    /* White */
+    background: #FFFFFF;
+    /* cards */
+    box-shadow: 0 4px 84px -40px rgba(157, 167, 251, 0.4);
+    border-radius: 10px;
+
+}
+
+.heart-graph{
+    padding: 16px 40px 24px;
+    gap: 16px;
+
+    width: 583px;
+    height: 484px;
+
+    /* White */
+    background: #FFFFFF;
+    /* cards */
+    box-shadow: 0 4px 84px -40px rgba(157, 167, 251, 0.4);
+    border-radius: 10px;
+}

@@ -1,8 +1,10 @@
 :root {
     --bg-leftsplit: #F5F3EF;
+    --bg-lightblue: #F2F3FF;
     --txt-blue :#0B23F4;
     --txt-black : #111111;
     --txt-lightgrey: #707070;
+    --txt-white: #FFFFFF;
 }
 
 * {
@@ -26,8 +28,10 @@ h4{
     font-weight: 500;
     font-size: 22px;
     line-height: 27px;
-    color: #111111;
+}
 
+.bg-lightblue{
+    background-color: var(--bg-lightblue);
 }
 
 .blue{
@@ -38,6 +42,9 @@ h4{
 }
 .lightgrey{
     color:  var(--txt-lightgrey)
+}
+.white{
+    color: var(--txt-white)
 }
 
 .body{
@@ -86,6 +93,18 @@ h4{
 .flex-row {
     display: flex;
     flex-direction: row;
+}
+
+.flex-center{
+
+    align-items: center;
+
+}
+
+.error404{
+    justify-content : space-evenly;
+    height: calc(100vh - 150px);
+
 }
 
 #root{
