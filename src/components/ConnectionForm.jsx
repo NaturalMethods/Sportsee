@@ -21,6 +21,7 @@ const ConnectionForm = () => {
             localStorage.setItem("userId", token.userId)
 
             navigate("/dashboard")
+            window.location.reload();
 
             // Récupérer à partir de l'API
             /* const response = await fetch("http://localhost:8000/api/login", {
@@ -51,13 +52,13 @@ const ConnectionForm = () => {
 
             <div className="input-section flex-col">
                 <label className="body lightgrey left-align">Adresse email</label>
-                <input className="input-form" type="email" value={email}
+                <input className="input-form body" type="email" value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
             </div>
             <div className="input-section flex-col">
                 <label className="body lightgrey left-align">Mot de passe</label>
-                <input className="input-form" type="password" value={password}
+                <input className="input-form body" type="password" value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </div>

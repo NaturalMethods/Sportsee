@@ -1,10 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
 :root {
+    --font: 'Inter';
+
     --bg-leftsplit: #F5F3EF;
     --bg-lightblue: #F2F3FF;
+
     --txt-blue :#0B23F4;
     --txt-black : #111111;
     --txt-lightgrey: #707070;
     --txt-white: #FFFFFF;
+    --txt-lightblue: #B6BDFC;
+    --txt-red: #F4320B;
+    --txt-lightred: #FCC1B6;
+
+    --btn-lightblue: #5465F7;
 }
 
 * {
@@ -14,7 +24,7 @@
 }
 
 h3{
-    font-family: 'Inter';
+    font-family: var(--font), sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 28px;
@@ -23,7 +33,7 @@ h3{
     color: var(--txt-blue);
 }
 h4{
-    font-family: 'Inter';
+    font-family: var(--font), sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 22px;
@@ -37,6 +47,15 @@ h4{
 .blue{
     color: var(--txt-blue);
 }
+.red{
+    color: var(--txt-red);
+}
+.lightred{
+    color: var(--txt-lightred);
+}
+.lightblue{
+    color: var(--txt-lightblue);
+}
 .black{
     color: var(--txt-black);
 }
@@ -49,7 +68,7 @@ h4{
 
 .body{
 
-    font-family: 'Inter';
+    font-family: var(--font), sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -58,6 +77,17 @@ h4{
 
 
 }
+.body-large{
+
+    font-family: var(--font), sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: flex-end;
+}
+
 .left-align{
     text-align: left;
 }
@@ -77,12 +107,10 @@ h4{
     border: 0.5px solid #717171;
     border-radius: 10px;
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 27px;
+    text-align: left;
     color: #111111;
+
+    padding-left: 16px;
 
 }
 
@@ -99,6 +127,10 @@ h4{
 
     align-items: center;
 
+}
+
+.flex-start{
+    align-items: flex-start;
 }
 
 .error404{
@@ -175,16 +207,23 @@ html, body {
     justify-content: center;
     align-items: center;
     padding: 16px 40px;
+
     gap: 10px;
 
     width: 100%;
     height: 51px;
 
-    background: #0B23F4;
+    background: var(--txt-blue);
     border-radius: 10px;
-    color : #ffffff;
+    color : var(--txt-white);
     border: none;
     outline: none;
+
+    transition: background-color 0.3s ease;
+}
+.connect-button:hover{
+    background: var(--btn-lightblue);
+
 }
 
 .imgsplit{

@@ -1,0 +1,84 @@
+.dashboard-week-stats{
+
+    padding: 0;
+    gap: 32px;
+
+    width: 1052px;
+    height: 429px;
+}
+
+.week-graph-number{
+    padding: 0;
+    gap: 30px;
+
+    width: 1052px;
+    height: 342px;
+}
+.piechart{
+    padding: 16px 38px 32px;
+    gap: 16px;
+
+    width: 450px;
+    height: 342px;
+
+    background: #FFFFFF;
+    /* cards */
+    box-shadow: 0 4px 84px -40px rgba(157, 167, 251, 0.4);
+    border-radius: 10px;
+}
+.piechart-title{
+    align-items: flex-start;
+    padding: 0 0 32px;
+
+    width: 374px;
+    height: 97px;
+
+}
+.objectif-piechart-number{
+
+    align-items: center;
+    padding: 0;
+    gap: 5px;
+
+    width: 254px;
+    height: 48px;
+
+}
+.week-stats-number{
+
+    align-items: flex-start;
+    padding: 0;
+    gap: 16px;
+
+    width: 572px;
+    height: 342px;
+
+}
+.activity-duration{
+
+    align-items: flex-start;
+    padding: 20px 30px;
+    gap: 19px;
+
+    width: 572px;
+    height: 103px;
+
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+.activity-duration-number{
+    align-items: baseline;
+    gap: 4px;
+}
+.distance{
+
+    align-items: flex-start;
+    padding: 20px 30px;
+    gap: 19px;
+
+    width: 572px;
+    height: 104px;
+
+    background: #FFFFFF;
+    border-radius: 10px;
+}

@@ -12,6 +12,9 @@
       "weight": 60,
       "createdAt": "2025-01-01"
     },
+    "statistics": {
+      "totalDistance": "2250"
+    },
     "email": "sophiemartin@gmail.com",
     "username": "sophiemartin",
     "password": "password123",

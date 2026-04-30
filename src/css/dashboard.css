@@ -3,8 +3,11 @@
     width: 100%;
     padding-top: 50px;
     padding-bottom: 50px;
-    
+
     align-items: center;
     background-color: #F2F3FF;
     height: fit-content;
+
+    gap: 71px;
+
 }
