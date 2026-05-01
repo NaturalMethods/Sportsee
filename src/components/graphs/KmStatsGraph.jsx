@@ -18,14 +18,42 @@ const data = [
     { name: "S4", km: 25 }
 ];
 
-const CustomTooltip = ({ active, payload }) => {
-    const isVisible = active && payload && payload.length;
+const CustomTooltip = ({ active, payload, label, coordinate }) => {
+    if (!active || !payload || !payload.length) return null;
     return (
-        <div className="custom-tooltip" style={{ visibility: isVisible ? 'visible' : 'hidden' }}>
-            {isVisible && (
-                <>
-                </>
-            )}
+        <div
+            style={{
+                position: "absolute",
+                left: coordinate.x,
+                top: coordinate.y,
+                transform: "translate(-50%, -100%)",
+                backgroundColor: "#000",
+                borderRadius: "8px",
+                padding: "10px 12px",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.2)"
+            }}
+        >
+            <p style={{
+                fontFamily: "Inter,sans-serif",
+                fontStyle: "normal",
+                fontWeight: "300",
+                fontSize: "12px",
+                color: "#E7E7E7" ,
+                margin: 0
+            }}>
+                {label}
+            </p>
+
+            <p style={{
+                fontFamily: "Inter,sans-serif",
+                fontStyle: "normal",
+                fontWeight: "500",
+                fontSize: "16px",
+                color: "#fff",
+                margin: 0
+            }}>
+                {payload[0].value} km
+            </p>
         </div>
     );
 };
@@ -34,6 +62,8 @@ const CustomTooltip = ({ active, payload }) => {
 
 
 const KmStatsGraph = ({ isAnimationActive, defaultIndex}) => {
+    const barColor = "#8884d8";
+    const barColorHovered = "#0B23F4";
     const [isHovered, setIsHovered] = useState(false);
     return (
         <BarChart
@@ -73,12 +103,12 @@ const KmStatsGraph = ({ isAnimationActive, defaultIndex}) => {
                         fontWeight: "400",
                         fontSize: "10px"
                     }} />
-            <Tooltip content={<CustomTooltip />} isAnimationActive={isAnimationActive} defaultIndex={defaultIndex} />
+            <Tooltip cursor={false} content={<CustomTooltip />} isAnimationActive={isAnimationActive} defaultIndex={defaultIndex} />
             <Bar dataKey="km"
                  barSize={14}
-                 fill="#8884d8"
-                 shape={(props) => <RoundedBar {...props} isHovered={isHovered} />} />
-            <Legend align="left" content={<CustomLegend isHovered={isHovered} />} />
+                 fill={barColor}
+                 shape={(props) => <RoundedBar {...props} isHovered={isHovered} barColorHovered={barColorHovered} />} />
+            <Legend align="left" content={<CustomLegend isHovered={isHovered} barColorHovered={barColorHovered} />} />
         </BarChart>
     );
 };

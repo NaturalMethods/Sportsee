@@ -16,7 +16,7 @@ const getRoundedBarPath = (x, y, width, height, radius) => {
     `;
 };
 const RoundedBar = (props) => {
-    const { x, y, width, height, isHovered  } = props;
+    const { x, y, width, height, isHovered, barColorHovered } = props;
 
     const safe = (v) => (typeof v === "number" ? v : 0);
 
@@ -29,7 +29,7 @@ const RoundedBar = (props) => {
                 safe(height),
                 100
             )}
-            fill={isHovered ? "#0B23F4" : props.fill}
+            fill={isHovered ? barColorHovered : props.fill}
 
         />
     );

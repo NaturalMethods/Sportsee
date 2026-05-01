@@ -20,9 +20,11 @@
 
     align-items: center;
 }
+
 .km-graph-title {
     gap: 16px;
     align-items: baseline;
+    margin-bottom: 32px;
 }
 .km-graph {
 
@@ -31,8 +33,42 @@
 }
 .km-graph-selector{
 
+    justify-content: center;
+    align-items: center;
+    padding: 14px 4px;
+    gap: 3px;
 
+    margin: 0 auto;
+    width: 156px;
+    height: 52px;
 
+    border-radius: 10px;
+}
+.km-title-container{
+    gap: 16px;
+    align-items: center;
+
+}
+
+.arrow-container-selector{
+
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+
+    width: 24px;
+    height: 24px;
+
+    background: #FFFFFF;
+    border: 1px solid #717171;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+.arrow-container-selector:hover{
+    background: var(--txt-lightblue);
+}
+.arrow-container-selector:active{
+    background: var(--txt-lightgrey);
 }
 
 .heart-graph{
@@ -47,4 +83,35 @@
     /* cards */
     box-shadow: 0 4px 84px -40px rgba(157, 167, 251, 0.4);
     border-radius: 10px;
+}
+.heart-graph-title{
+    gap: 16px;
+    align-items: baseline;
+    margin-bottom: 32px;
+}
+.heart-title-container{
+    gap: 170px;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+
+}
+.heart-graph-selector{
+
+    justify-content: center;
+    align-items: center;
+    padding: 14px 4px;
+    gap: 3px;
+
+    margin: 0 auto;
+    width: 156px;
+    height: 52px;
+
+    border-radius: 10px;
+}
+.heart-graph-container {
+    width: 500px;
+    margin-top: 16px;
+
 }
