@@ -21,8 +21,8 @@ const Header = () => {
         <header className="flex-row header-container">
             <img src={logo} alt="logo" />
             <nav className="flex-row navmenu">
-                <NavLink to="/dashboard" className={({ isActive }) => isActive ? "active nav-link body blue" : "nav-link body black"}>Dashboard</NavLink>
-                <NavLink to="/profile" className={({ isActive }) => isActive ? "active nav-link body blue" : "nav-link body black"}>Mon profil</NavLink>
+                <NavLink to="/dashboard" className="nav-link body black" >Dashboard</NavLink>
+                <NavLink to="/profile" className="nav-link body black" >Mon profil</NavLink>
                 <span className="body black">|</span>
                 <span onClick={handleLogout} className="nav-link body blue" style={{ cursor: "pointer" }}>
                     Se déconnecter

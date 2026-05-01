@@ -1,7 +1,7 @@
-import "../css/dashboard.css"
-import DashboardHeaderProfile from "../components/DashboardHeaderProfile.jsx";
-import DashboardStats from "../components/DashboardStats.jsx";
-import DashboardWeekStats from "../components/DashboardWeekStats.jsx";
+import "../css/dashboard/dashboard.css"
+import DashboardHeaderProfile from "../components/dashboard/DashboardHeaderProfile.jsx";
+import DashboardStats from "../components/dashboard/DashboardStats.jsx";
+import DashboardWeekStats from "../components/dashboard/DashboardWeekStats.jsx";
 
 const Dashboard = () => {
     return (

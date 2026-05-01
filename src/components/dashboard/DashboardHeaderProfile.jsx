@@ -1,17 +1,13 @@
-
-import "../css/style.css"
-import "../css/dashboardheaderprofile.css"
-import profilepic from "../assets/profile.jpg";
-import outline from "../assets/outline.svg";
-
 import {useContext} from "react";
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../../context/UserContext.jsx";
 
+import "../../css/style.css"
+import "../../css/dashboard/dashboardheaderprofile.css"
+import profilepic from "../../assets/profile.jpg";
+import outline from "../../assets/OUTLINE.svg";
 
 const DashboardHeaderProfile = () => {
     const { user} = useContext(UserContext);
-
-
 
     const formatCreatedAt = user?.createdAt
         ? new Intl.DateTimeFormat("fr-FR", {
@@ -20,7 +16,6 @@ const DashboardHeaderProfile = () => {
             year: "numeric"
         }).format(new Date(user.createdAt))
         : null;
-
 
     return (
 

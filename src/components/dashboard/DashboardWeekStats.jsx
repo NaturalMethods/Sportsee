@@ -1,6 +1,6 @@
 
-import "../css/style.css"
-import "../css/dashboardweekstats.css"
+import "../../css/style.css"
+import "../../css/dashboard/dashboardweekstats.css"
 const DashboardWeekStats = () => {
     return (
 

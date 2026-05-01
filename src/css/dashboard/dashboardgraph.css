@@ -13,11 +13,25 @@
     width: 445px;
     height: 484px;
 
-    /* White */
     background: #FFFFFF;
-    /* cards */
+
     box-shadow: 0 4px 84px -40px rgba(157, 167, 251, 0.4);
     border-radius: 10px;
+
+    align-items: center;
+}
+.km-graph-title {
+    gap: 16px;
+    align-items: baseline;
+}
+.km-graph {
+
+    margin-top: 16px;
+
+}
+.km-graph-selector{
+
+
 
 }
 

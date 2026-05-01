@@ -1,6 +1,6 @@
 
-import "../css/style.css"
-import "../css/dashboardstats.css"
+import "../../css/style.css"
+import "../../css/dashboard/dashboardstats.css"
 import DashboardGraph from "./DashboardGraph.jsx";
 const DashboardStats = () => {
     return (

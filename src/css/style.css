@@ -43,6 +43,9 @@ h4{
 .bg-lightblue{
     background-color: var(--bg-lightblue);
 }
+.bg-blue{
+   background-color: var(--txt-blue);
+}
 
 .blue{
     color: var(--txt-blue);
@@ -86,6 +89,21 @@ h4{
     line-height: 19px;
     display: flex;
     align-items: flex-end;
+}
+.body-small{
+    font-family: var(--font), sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+}
+.body-caption text{
+    font-family: var(--font),sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+
 }
 
 .left-align{
