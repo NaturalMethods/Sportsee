@@ -1,6 +1,7 @@
 
 import "../../css/style.css"
 import "../../css/dashboard/dashboardweekstats.css"
+import HebdoRunPieChart from "../graphs/HebdoRunPieChart.jsx";
 const DashboardWeekStats = () => {
     return (
 
@@ -11,7 +12,7 @@ const DashboardWeekStats = () => {
             </div>
 
             <div className="week-graph-number flex-row">
-                <div className="piechart">
+                <div className="piechart flex-col">
 
                     <div className=" piechart-title flex-col">
                         <div className="objectif-piechart-number flex-row flex-center">
@@ -19,7 +20,9 @@ const DashboardWeekStats = () => {
                         </div>
                         <label className="body lightgrey">Courses hebdomadaire réalisées</label>
                     </div>
-
+                    <div className="hebdo-run-piechart flex-col">
+                        <HebdoRunPieChart />
+                    </div>
                 </div>
 
                 <div className="week-stats-number flex-col">

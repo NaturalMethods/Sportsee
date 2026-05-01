@@ -1,12 +1,24 @@
 const CustomLegend = (props) => {
     let { payload, isHovered, barColorHovered } = props;
 
-    if (!isHovered) isHovered = false;
+    if (!payload || payload.length === 0) return null;
+
+    // 👉 détecte si maxBpm existe
+    const hasMaxBpm = payload.some(p => p.dataKey === "maxbpm");
+
+    // 👉 copie du payload
+    let orderedPayload = [...payload];
+
+    // 🔁 swap uniquement si maxBpm présent
+    if (hasMaxBpm && orderedPayload.length >= 2) {
+        [orderedPayload[0], orderedPayload[1]] =
+            [orderedPayload[1], orderedPayload[0]];
+    }
 
     return (
         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
 
-            {payload.map((entry, index) => {
+            {orderedPayload.map((entry, index) => {
 
                 const isLine = entry.dataKey === "avgBpm";
 
@@ -26,7 +38,6 @@ const CustomLegend = (props) => {
                         {isLine ? (
                             // 🔵 LINE + DOT (moyenne)
                             <svg width="26" height="10" viewBox="0 0 26 10">
-                                {/* ligne gauche */}
                                 <line
                                     x1="0"
                                     y1="5"
@@ -36,7 +47,6 @@ const CustomLegend = (props) => {
                                     strokeWidth="2"
                                 />
 
-                                {/* rond */}
                                 <circle
                                     cx="13"
                                     cy="5"
@@ -44,7 +54,6 @@ const CustomLegend = (props) => {
                                     fill={entry.color}
                                 />
 
-                                {/* ligne droite */}
                                 <line
                                     x1="16"
                                     y1="5"
@@ -74,7 +83,6 @@ const CustomLegend = (props) => {
                     </div>
                 );
             })}
-
         </div>
     );
 };

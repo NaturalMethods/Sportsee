@@ -12,12 +12,12 @@ import CustomLegend from "./CustomLegend.jsx";
 
 const data = [
     { name: "Lun", minbpm: 137, maxbpm : 145 },
-    { name: "Mar", minbpm: 152, maxbpm : 145 },
-    { name: "Mer", minbpm: 168, maxbpm : 145 },
-    { name: "Jeu", minbpm: 187, maxbpm : 145 },
+    { name: "Mar", minbpm: 145, maxbpm : 152 },
+    { name: "Mer", minbpm: 145, maxbpm : 168 },
+    { name: "Jeu", minbpm: 145, maxbpm : 187 },
     { name: "Ven", minbpm: 145, maxbpm : 145 },
     { name: "Sam", minbpm: 132, maxbpm : 145 },
-    { name: "Dim", minbpm: 183, maxbpm : 145 }
+    { name: "Dim", minbpm: 145, maxbpm : 183 }
 ];
 
 
