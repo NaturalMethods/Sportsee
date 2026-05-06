@@ -35,3 +35,18 @@ export const getUserInfos = () => {
         }, 500)
     })
 }
+
+export const getRunningData = () => {
+
+    const userId = localStorage.getItem("userId");
+    return new Promise((resolve, reject) => {
+
+        setTimeout(() => {
+            const user = data.find((u) => u.id === userId);
+
+            if (user) resolve( user.runningData)
+            else reject("User not found")
+        }, 500)
+    })
+
+}

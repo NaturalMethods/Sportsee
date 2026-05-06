@@ -3,40 +3,27 @@ const CustomLegend = (props) => {
 
     if (!payload || payload.length === 0) return null;
 
-    // 👉 détecte si maxBpm existe
     const hasMaxBpm = payload.some(p => p.dataKey === "maxbpm");
 
-    // 👉 copie du payload
     let orderedPayload = [...payload];
 
-    // 🔁 swap uniquement si maxBpm présent
     if (hasMaxBpm && orderedPayload.length >= 2) {
         [orderedPayload[0], orderedPayload[1]] =
             [orderedPayload[1], orderedPayload[0]];
     }
 
     return (
-        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        <div className="customlegend flex-row">
 
             {orderedPayload.map((entry, index) => {
 
                 const isLine = entry.dataKey === "avgBpm";
 
                 return (
-                    <div
-                        key={`item-${index}`}
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 6,
-                            fontFamily: "Inter, sans-serif",
-                            color: "black"
-                        }}
-                    >
+                    <div key={`item-${index}`} className="customlegend-text">
 
-                        {/* ICON */}
                         {isLine ? (
-                            // 🔵 LINE + DOT (moyenne)
+                            // Line with dots
                             <svg width="26" height="10" viewBox="0 0 26 10">
                                 <line
                                     x1="0"
@@ -64,21 +51,16 @@ const CustomLegend = (props) => {
                                 />
                             </svg>
                         ) : (
-                            // 🔴 BAR (simple rond)
+                            // Round
                             <div
+                                className="customlegend-round"
                                 style={{
-                                    width: 10,
-                                    height: 10,
-                                    borderRadius: "50%",
-                                    backgroundColor: isHovered
-                                        ? barColorHovered
-                                        : entry.color,
-                                    transition: "background-color 0.3s ease"
+                                    backgroundColor: isHovered ? barColorHovered : entry.color
                                 }}
                             />
                         )}
 
-                        {/* TEXT */}
+                        {/* Text */}
                         <span>{entry.value}</span>
                     </div>
                 );
@@ -86,5 +68,4 @@ const CustomLegend = (props) => {
         </div>
     );
 };
-
 export default CustomLegend;

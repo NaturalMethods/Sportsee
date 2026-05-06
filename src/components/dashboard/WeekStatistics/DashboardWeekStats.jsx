@@ -1,7 +1,7 @@
 
-import "../../css/style.css"
-import "../../css/dashboard/dashboardweekstats.css"
-import HebdoRunPieChart from "../graphs/HebdoRunPieChart.jsx";
+import "../../../css/style.css"
+import "../../../css/dashboard/dashboardweekstats.css"
+import HebdoRunPieChart from "../../graphs/HebdoRunPieChart.jsx";
 const DashboardWeekStats = () => {
     return (
 

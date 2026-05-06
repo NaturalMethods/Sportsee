@@ -13,7 +13,6 @@ const ConnectionForm = () => {
         console.log(email, password)
 
         try {
-            console.log("eheh",email)
             // Récupérer à partir des données mockées
             const token = await getTokenByAuth(email, password);
             console.log(token)

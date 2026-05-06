@@ -10,93 +10,83 @@ import {
 import RoundedBar from "./RoundedBar.jsx";
 import CustomLegend from "./CustomLegend.jsx";
 
-const data = [
-    { name: "Lun", minbpm: 137, maxbpm : 145 },
-    { name: "Mar", minbpm: 145, maxbpm : 152 },
-    { name: "Mer", minbpm: 145, maxbpm : 168 },
-    { name: "Jeu", minbpm: 145, maxbpm : 187 },
-    { name: "Ven", minbpm: 145, maxbpm : 145 },
-    { name: "Sam", minbpm: 132, maxbpm : 145 },
-    { name: "Dim", minbpm: 145, maxbpm : 183 }
-];
 
+const HeartStatsGraph = ({data}) => {
 
-
-const HeartStatsGraph = () => {
-
-    const barColor = "#F4320B";
-    const secondBarColor = "#FCC1B6";
-    const barColorHovered = "#F4320B";
+    const barColor = "var(--txt-red)";
+    const secondBarColor = "var(--txt-lightred)";
+    const barColorHovered = "var(--txt-red)";
     const [isHovered, setIsHovered] = useState(false);
 
-    const enrichedData = data.map((item) => ({
-        ...item,
-        avgBpm: (item.minbpm + item.maxbpm) / 2
-    }));
+    const enrichedData = data.map(item => {
+        const values = [item.minbpm, item.maxbpm].filter(v => v !== 0);
+        const avgBpm = values.length ? values.reduce((a, b) => a + b, 0) / values.length : null;
+
+        return { ...item, avgBpm };
+    });
 
     return (
-        <ComposedChart
+        <ComposedChart width={495} height={307}
             onMouseMove={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            style={{width: '495', maxWidth: '495px', height: '307px', aspectRatio: 1 }}
             data={enrichedData}
-            margin={{
-                top: 10,
-                right: 0,
-                left: 0,
-                bottom: 0,
-            }}
+            margin={{top: 10}}
         >
             <CartesianGrid  horizontal={true}
                             vertical={false}
-                            stroke="#E5E7EB"
-                            strokeDasharray="2 2" />
+                            stroke="var(--grey-grid)"
+                            strokeDasharray="3 3"
+            />
             <XAxis dataKey="name"
                    tickMargin={15}
                    tickLine={false}
-                   tick={{
-                       fontFamily: 'Inter,sans-serif',
-                       fontStyle: "normal",
-                       fontWeight: "400",
-                       fontSize: "12px"
-                   }} />
+                   tick={{className: "body-small"}}
+            />
             <YAxis
                 tickMargin={5}
                 tickLine={false}
                 width={30}
                 domain={[130, 190]}
                 ticks={[130,145,160,175,190]}
-                tick={{
-                    fontFamily: "Inter,sans-serif",
-                    fontStyle: "normal",
-                    fontWeight: "400",
-                    fontSize: "10px"
-                }} />
+                tick={{className: "body-caption"}}
+                allowDataOverflow={true}
+            />
             <Tooltip active={false} />
             <Bar dataKey="minbpm"
                  name = "Min BPM"
                  barSize={14}
                  fill={secondBarColor}
-                 shape={(props) => <RoundedBar {...props} isHovered={isHovered} barColorHovered={secondBarColor} />} />
+                 shape={(props) =>
+                     <RoundedBar {...props}
+                                 isHovered={isHovered}
+                                 barColorHovered={secondBarColor} />
+            } />
             <Bar dataKey="maxbpm"
                  name = "Max BPM"
                  barSize={14}
                  fill={barColor}
-                 shape={(props) => <RoundedBar {...props} isHovered={isHovered} barColorHovered={barColorHovered} />} />
-
+                 shape={(props) =>
+                     <RoundedBar {...props}
+                                 isHovered={isHovered}
+                                 barColorHovered={barColorHovered} />
+            } />
             <Line
+                connectNulls={true}
                 type="monotone"
                 dataKey="avgBpm"
-                stroke={isHovered ? "#0B23F4" : "#F2F3FF"}
+                stroke={isHovered ? "var(--txt-blue)" : "var(--bg-lightblue)"}
                 strokeWidth={2}
-                dot={{fill : "#0B23F4", r :2, stroke: "#0B23F4"}}
+                dot={{
+                    fill : "var(--txt-blue)",
+                    stroke: "var(--txt-blue)",
+                    r :2
+                }}
                 activeDot={{
-                    fill :"#0B23F4",
-                    stroke: "#0B23F4",
+                    fill :"var(--txt-blue)",
+                    stroke: "var(--txt-blue)",
                     r :2
                 }}
             />
-
             <Legend align="left" content={<CustomLegend />} />
         </ComposedChart>
     );

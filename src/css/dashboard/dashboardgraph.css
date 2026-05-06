@@ -6,6 +6,25 @@
 
 }
 
+.customlegend{
+    gap: 12px;
+    align-items: center;
+}
+.customlegend-text{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: Inter, sans-serif;
+    color: black;
+    margin-top: 15px;
+}
+.customlegend-round{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
 .distance-graph {
 
     padding: 16px 40px 24px;
@@ -27,12 +46,9 @@
     margin-bottom: 32px;
 }
 .km-graph {
-
     margin-top: 16px;
-
 }
 .km-graph-selector{
-
     justify-content: center;
     align-items: center;
     padding: 14px 4px;

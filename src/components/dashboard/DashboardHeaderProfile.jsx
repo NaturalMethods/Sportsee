@@ -3,7 +3,6 @@ import { UserContext } from "../../context/UserContext.jsx";
 
 import "../../css/style.css"
 import "../../css/dashboard/dashboardheaderprofile.css"
-import profilepic from "../../assets/profile.jpg";
 import outline from "../../assets/OUTLINE.svg";
 
 const DashboardHeaderProfile = () => {
@@ -22,7 +21,7 @@ const DashboardHeaderProfile = () => {
         <section className="headerprofile flex-row">
 
             <div className="flex-row profile-infos">
-                <img className="profilepic" src={profilepic} alt="profile picture" />
+                <img className="profilepic" src={user?.profilePicture} alt="profile picture" />
                 <div className="profile-info flex-col" >
                     <h4 className="black">{user?.firstName} {user?.lastName}</h4>
                     <p className="body lightgrey">Membre depuis le {formatCreatedAt}</p>

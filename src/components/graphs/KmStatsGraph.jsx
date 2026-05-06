@@ -10,105 +10,84 @@ import {
 } from 'recharts';
 import RoundedBar from "./RoundedBar.jsx";
 import CustomLegend from "./CustomLegend.jsx";
+import "../../css/graphs/KmStatsGraph.css"
 
-const data = [
-    { name: "S1", km: 10 },
-    { name: "S2", km: 20 },
-    { name: "S3", km: 15 },
-    { name: "S4", km: 25 }
-];
+import {format2DigitDate} from "../../utils/utils.jsx";
 
-const CustomTooltip = ({ active, payload, label, coordinate }) => {
+const CustomToolTip = ({ active, payload, coordinate }) => {
     if (!active || !payload || !payload.length) return null;
+
+    const data = payload[0].payload;
+
     return (
         <div
+            className="customToolTip flex-col"
             style={{
-                position: "absolute",
                 left: coordinate.x,
                 top: coordinate.y,
-                transform: "translate(-50%, -100%)",
-                backgroundColor: "#000",
-                borderRadius: "8px",
-                padding: "10px 12px",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.2)"
             }}
         >
-            <p style={{
-                fontFamily: "Inter,sans-serif",
-                fontStyle: "normal",
-                fontWeight: "300",
-                fontSize: "12px",
-                color: "#E7E7E7" ,
-                margin: 0
-            }}>
-                {label}
+            <p className="body-small lightwhite">
+                {format2DigitDate(data.startDate)} au {format2DigitDate(data.endDate)}
             </p>
 
-            <p style={{
-                fontFamily: "Inter,sans-serif",
-                fontStyle: "normal",
-                fontWeight: "500",
-                fontSize: "16px",
-                color: "#fff",
-                margin: 0
-            }}>
-                {payload[0].value} km
+            <p className="body-large white">
+                {data.km} km
             </p>
         </div>
     );
 };
 
+const KmStatsGraph = ({ isAnimationActive, defaultIndex, data}) => {
 
-
-
-const KmStatsGraph = ({ isAnimationActive, defaultIndex}) => {
-    const barColor = "#8884d8";
-    const barColorHovered = "#0B23F4";
+    const barColor = "var(--bar-color)";
+    const barColorHovered = "var(--txt-blue)";
     const [isHovered, setIsHovered] = useState(false);
+
     return (
-        <BarChart
+        <BarChart width={330} height={307}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            style={{ width: '100%', maxWidth: '330px', height: '307px', aspectRatio: 1 }}
             data={data}
-            margin={{
-                top: 10,
-                right: 0,
-                left: 0,
-                bottom: 0,
-            }}
+            margin={{ top: 10 }}
         >
             <CartesianGrid  horizontal={true}
                             vertical={false}
-                            stroke="#E5E7EB"
-                            strokeDasharray="2 2" />
+                            stroke="var(--grey-grid)"
+                            strokeDasharray="3 3"
+            />
             <XAxis dataKey="name"
                    tickMargin={15}
                    tickLine={false}
-                   tick={{
-                       fontFamily: 'Inter,sans-serif',
-                       fontStyle: "normal",
-                       fontWeight: "400",
-                       fontSize: "12px"
-                   }} />
+                   tick={{className: "body-small"}}
+            />
             <YAxis
                     tickMargin={10}
                     tickLine={false}
                     width={30}
                     domain={[0, 30]}
                     ticks={[0,10,20,30]}
-                    tick={{
-                        fontFamily: "Inter,sans-serif",
-                        fontStyle: "normal",
-                        fontWeight: "400",
-                        fontSize: "10px"
-                    }} />
-            <Tooltip cursor={false} content={<CustomTooltip />} isAnimationActive={isAnimationActive} defaultIndex={defaultIndex} />
+                    tick={{className: "body-caption"}}
+            />
+            <Tooltip cursor={false}
+                     content={<CustomToolTip />}
+                     isAnimationActive={isAnimationActive}
+                     defaultIndex={defaultIndex}
+            />
             <Bar dataKey="km"
                  barSize={14}
                  fill={barColor}
-                 shape={(props) => <RoundedBar {...props} isHovered={isHovered} barColorHovered={barColorHovered} />} />
-            <Legend align="left" content={<CustomLegend isHovered={isHovered} barColorHovered={barColorHovered} />} />
+                 shape={(props)=>
+                     <RoundedBar {...props}
+                                 isHovered={isHovered}
+                                 barColorHovered={barColorHovered}
+                     />}
+            />
+            <Legend align="left"
+                    content={<CustomLegend isHovered={isHovered}
+                                           barColorHovered={barColorHovered}
+                             />}
+            />
         </BarChart>
     );
 };

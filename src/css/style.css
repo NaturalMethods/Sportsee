@@ -7,12 +7,16 @@
     --bg-lightblue: #F2F3FF;
 
     --txt-blue :#0B23F4;
+    --bar-color: #8884d8;
     --txt-black : #111111;
     --txt-lightgrey: #707070;
+    --grey-grid: #E5E7EB;
     --txt-white: #FFFFFF;
     --txt-lightblue: #B6BDFC;
     --txt-red: #F4320B;
     --txt-lightred: #FCC1B6;
+    --txt-lightwhite: #E7E7E7;
+
 
     --btn-lightblue: #5465F7;
 }
@@ -68,6 +72,9 @@ h4{
 .white{
     color: var(--txt-white)
 }
+.lightwhite{
+    color: var(--txt-lightwhite)
+}
 
 .body{
 
@@ -103,7 +110,13 @@ h4{
     font-weight: 400;
     font-size: 10px;
     line-height: 12px;
-
+}
+.body-caption {
+    font-family: var(--font),sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
 }
 
 .flip{
