@@ -25,3 +25,13 @@ export function format2DigitDate(date) {
     }).format(new Date(date))
         .replace("/", ".");
 }
+
+export function format4DigitDate(date) {
+    if (!date) return "";
+
+    return new Intl.DateTimeFormat("fr-FR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+    }).format(new Date(date))
+}

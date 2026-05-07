@@ -127,6 +127,38 @@ export function getKmForWeek(start, end, runningData) {
         .reduce((sum, d) => sum + Number(d.distance), 0);
 }
 
+export function getWeekDuration(start, end, runningData) {
+
+    const normalizedStart = startOfDay(start);
+    const normalizedEnd = endOfDay(end);
+
+
+    return runningData
+        .filter((d) => {
+
+            const date = new Date(d.date);
+
+            return date >= normalizedStart &&
+                date <= normalizedEnd;
+        })
+        .reduce((sum, d) => sum + Number(d.duration), 0);
+}
+
+export function getWeekNbrOfRun(start, end, runningData) {
+
+    const normalizedStart = startOfDay(start);
+    const normalizedEnd = endOfDay(end);
+
+    return runningData
+        .filter((d) => {
+
+            const date = new Date(d.date);
+            return date >= normalizedStart && date <= normalizedEnd;
+        })
+        .length;
+
+}
+
 export function buildWeeklyHeartRateData(start, runningData) {
     const days = ["lun", "mar", "mer", "jeu", "ven", "sam", "dim"];
     const format = (d) => {

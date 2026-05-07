@@ -1,7 +1,7 @@
 import KmStatsGraph from "../../graphs/KmStatsGraph.jsx";
 import Arrow from "../../../assets/RightArrow.svg"
 import {useEffect, useState} from "react";
-import {buildWeeklyKmData, formatDateShort, getAverageKmForRange, getKmForWeek} from "../../../utils/utils.jsx";
+import {buildWeeklyKmData, formatDateShort, getAverageKmForRange} from "../../../utils/utils.jsx";
 import {addDays} from "../../../utils/date.jsx";
 
 
@@ -43,8 +43,6 @@ function get4WeekRange(referenceDate = new Date()) {
     };
 }
 
-
-
 const DistanceCard = ({runningData}) => {
 
     const [currentData, setCurrentData] = useState([]);
@@ -55,7 +53,6 @@ const DistanceCard = ({runningData}) => {
     const [averageKmForRange, setAverageKmForRange] = useState();
     const [weeks, setWeeks] = useState([]);
     const [kmData, setKmData] = useState([]);
-
 
     function next4WeekRange() {
         setDate(prev => addDays(prev, 28));

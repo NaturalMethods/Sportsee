@@ -23,7 +23,7 @@ const Dashboard = () => {
         <section className="flex-col dashboard-section">
             <DashboardHeaderProfile />
             <DashboardStats runningData={runningData} />
-            <DashboardWeekStats />
+            <DashboardWeekStats runningData={runningData} />
         </section>
     )
 }

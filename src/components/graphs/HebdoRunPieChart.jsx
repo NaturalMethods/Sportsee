@@ -2,9 +2,9 @@ import { PieChart, Pie, Cell } from "recharts";
 
 const COLORS = ["#0B23F4", "#B6BDFC"];
 
-export default function HebdoRunPieChart() {
+export default function HebdoRunPieChart({nbrOfRun}) {
     const goal = 6;
-    const done = 4;
+    const done = nbrOfRun;
 
     const data = [
         { name: "réalisées", value: done },
