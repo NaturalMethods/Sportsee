@@ -1,7 +1,7 @@
 import KmStatsGraph from "../../graphs/KmStatsGraph.jsx";
 import Arrow from "../../../assets/RightArrow.svg"
 import {useEffect, useState} from "react";
-import {formatDateShort, getAverageKmForRange} from "../../../utils/utils.jsx";
+import {buildWeeklyKmData, formatDateShort, getAverageKmForRange, getKmForWeek} from "../../../utils/utils.jsx";
 import {addDays} from "../../../utils/date.jsx";
 
 
@@ -51,7 +51,11 @@ const DistanceCard = ({runningData}) => {
     const [ date, setDate] = useState(new Date());
     const [start, setStart4WeekRange] = useState(new Date());
     const [end, setEnd4WeekRange] = useState(new Date());
+
     const [averageKmForRange, setAverageKmForRange] = useState();
+    const [weeks, setWeeks] = useState([]);
+    const [kmData, setKmData] = useState([]);
+
 
     function next4WeekRange() {
         setDate(prev => addDays(prev, 28));
@@ -67,8 +71,12 @@ const DistanceCard = ({runningData}) => {
 
         setDate(new Date());
 
-        setStart4WeekRange(get4WeekRange().start);
-        setEnd4WeekRange(get4WeekRange().end);
+        const fourWeekRange = get4WeekRange();
+
+        setStart4WeekRange(fourWeekRange.start);
+        setEnd4WeekRange(fourWeekRange.end);
+        setWeeks(fourWeekRange.weeks);
+        setKmData(buildWeeklyKmData(weeks,currentData))
 
     },[]);
 
@@ -85,10 +93,13 @@ const DistanceCard = ({runningData}) => {
         // Update start and end range
         setStart4WeekRange(range.start);
         setEnd4WeekRange(range.end);
-        setAverageKmForRange(getAverageKmForRange(start,end,currentData));
+
+        setWeeks(range.weeks);
+        setKmData(buildWeeklyKmData(range.weeks,currentData))
+
+        setAverageKmForRange(getAverageKmForRange(range.start,range.end,currentData));
 
     },[date, currentData]);
-
 
     return (
         <div className="distance-graph">
@@ -109,7 +120,7 @@ const DistanceCard = ({runningData}) => {
                 <p className="body-small lightgrey">Total des kilomètres 4 dernières semaines</p>
             </div>
             <div className="flex-col km-graph">
-                <KmStatsGraph />
+                <KmStatsGraph  data={kmData} />
             </div>
         </div>
 

@@ -70,15 +70,35 @@ export function buildWeeklyKmData(weeks,runningData) {
         endDate: w.end,
     }));
 }
+
+export function startOfDay(date) {
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    return d;
+}
+
+export function endOfDay(date) {
+    const d = new Date(date);
+    d.setHours(23, 59, 59, 999);
+    return d;
+}
+
 // Calcule la somme des Kms de la semaine
 export function getKmForWeek(start, end, runningData) {
 
+    const normalizedStart = startOfDay(start);
+    const normalizedEnd = endOfDay(end);
+
+
     return runningData
         .filter((d) => {
+
             const date = new Date(d.date);
-            return date >= start && date <= end;
+
+            return date >= normalizedStart &&
+                date <= normalizedEnd;
         })
-        .reduce((sum, d) => sum + d.distance, 0);
+        .reduce((sum, d) => sum + Number(d.distance), 0);
 }
 
 export function buildWeeklyHeartRateData(start, runningData) {
