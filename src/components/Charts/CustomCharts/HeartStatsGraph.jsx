@@ -7,8 +7,8 @@ import {
     Tooltip,
     Legend, ComposedChart, Line
 } from 'recharts';
-import RoundedBar from "./RoundedBar.jsx";
-import CustomLegend from "./CustomLegend.jsx";
+import RoundedBar from "../ChartsElements/RoundedBar.jsx";
+import CustomLegend from "../ChartsElements/CustomLegend.jsx";
 
 
 const HeartStatsGraph = ({data}) => {

@@ -1,11 +1,11 @@
 
 import { NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../../Context/UserContext.jsx";
 
 
-import "../css/header.css"
-import logo from "../assets/logo.svg"
+import "../../css/header.css"
+import logo from "../../assets/Logo.svg"
 const Header = () => {
     const navigate = useNavigate();
     const { setUser } = useContext(UserContext);

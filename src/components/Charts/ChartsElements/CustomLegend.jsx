@@ -1,3 +1,5 @@
+import "../../../css/ChartsElements/CustomLegend.css"
+
 const CustomLegend = (props) => {
     let { payload, isHovered, barColorHovered } = props;
 

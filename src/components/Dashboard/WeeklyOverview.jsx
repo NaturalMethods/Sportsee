@@ -1,11 +1,12 @@
 
-import "../../../css/style.css"
-import "../../../css/dashboard/dashboardweekstats.css"
-import HebdoRunPieChart from "../../graphs/HebdoRunPieChart.jsx";
+import "../../css/style.css"
+import "../../css/dashboard/Section/weeklyOverview.css"
+import HebdoRunPieChart from "../Charts/CustomCharts/HebdoRunPieChart.jsx";
 import {useEffect, useState} from "react";
-import {getKmForWeek, getWeekDuration, getWeekNbrOfRun, getWeekRange} from "../../../utils/utils.jsx";
-import { format4DigitDate} from "../../../utils/date.jsx";
-const DashboardWeekStats = ({runningData}) => {
+import {getKmForWeek, getWeekDuration, getWeekNbrOfRun, getWeekRange} from "../../utils/utils.jsx";
+import { format4DigitDate} from "../../utils/date.jsx";
+import {getWeeklyGoal} from "../../data/MockService.jsx";
+const WeeklyOverview = ({runningData}) => {
 
     const [start, setStartWeekRange] = useState(new Date());
     const [end, setEndWeekRange] = useState(new Date());
@@ -13,6 +14,10 @@ const DashboardWeekStats = ({runningData}) => {
     const [nbrOfRun, setNbrOfRun] = useState();
     const [duration, setDuration] = useState();
     const [distance, setDistance] = useState();
+
+    const [weeklyGoal, setWeeklyGoal] = useState(0);
+
+
 
     useEffect(() => {
 
@@ -28,7 +33,14 @@ const DashboardWeekStats = ({runningData}) => {
 
     },[runningData]);
 
+    useEffect(() => {
+        const fetchWeeklyGoal = async () => {
+            const week = await getWeeklyGoal();
+            setWeeklyGoal(week);
+        };
+        fetchWeeklyGoal()
 
+    },[])
 
     return (
 
@@ -43,12 +55,12 @@ const DashboardWeekStats = ({runningData}) => {
 
                     <div className=" piechart-title flex-col">
                         <div className="objectif-piechart-number flex-row flex-center">
-                            <h3 className="blue">x{nbrOfRun}</h3><label className="body-large lightblue"> sur objectif de 6</label>
+                            <h3 className="blue">x{nbrOfRun}</h3><label className="body-large lightblue"> sur objectif de {weeklyGoal}</label>
                         </div>
                         <label className="body lightgrey">Courses hebdomadaire réalisées</label>
                     </div>
                     <div className="hebdo-run-piechart flex-col">
-                        <HebdoRunPieChart nbrOfRun={nbrOfRun} />
+                        <HebdoRunPieChart nbrOfRun={nbrOfRun} weeklyGoal={weeklyGoal} />
                     </div>
                 </div>
 
@@ -71,4 +83,4 @@ const DashboardWeekStats = ({runningData}) => {
         </section>
     )
 }
-export default DashboardWeekStats
+export default WeeklyOverview

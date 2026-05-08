@@ -1,29 +1,25 @@
 import "../css/dashboard/dashboard.css"
-import DashboardHeaderProfile from "../components/dashboard/DashboardHeaderProfile.jsx";
-import DashboardStats from "../components/dashboard/Graphs/DashboardStats.jsx";
-import DashboardWeekStats from "../components/dashboard/WeekStatistics/DashboardWeekStats.jsx";
-import {getRunningData} from "../data/MockService.jsx";
-import {useEffect, useState} from "react";
+import ProfileSummary from "../components/Dashboard/ProfileSummary.jsx";
+import LastPerformanceCharts from "../components/Dashboard/LastPerformanceCharts.jsx";
+import WeeklyOverview from "../components/Dashboard/WeeklyOverview.jsx";
+import {useContext, useEffect, useState} from "react";
+import {UserContext} from "../Context/UserContext.jsx";
 
 const Dashboard = () => {
+    const {runningData } = useContext(UserContext);
 
-    const [runningData, setRunningData] = useState([]);
+    const [runData, setRunningData] = useState([]);
 
     useEffect(() =>{
+            setRunningData(runningData);
 
-        const fetchData = async () => {
-
-            setRunningData(await getRunningData());
-
-        }
-        fetchData();
-    }, []);
+    }, [runningData]);
 
     return (
         <section className="flex-col dashboard-section">
-            <DashboardHeaderProfile />
-            <DashboardStats runningData={runningData} />
-            <DashboardWeekStats runningData={runningData} />
+            <ProfileSummary />
+            <LastPerformanceCharts runningData={runData} />
+            <WeeklyOverview runningData={runData} />
         </section>
     )
 }

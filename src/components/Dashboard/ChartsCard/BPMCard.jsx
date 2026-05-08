@@ -2,7 +2,8 @@ import Arrow from "../../../assets/RightArrow.svg"
 import {useEffect, useState} from "react";
 import {buildWeeklyHeartRateData, formatDateShort, getAverageBpmForRange, getWeekRange} from "../../../utils/utils.jsx";
 import {addDays} from "../../../utils/date.jsx";
-import HeartStatsGraph from "../../graphs/HeartStatsGraph.jsx";
+import HeartStatsGraph from "../../Charts/CustomCharts/HeartStatsGraph.jsx";
+import "../../../css/dashboard/ChartsCard/BPMCard.css"
 
 const BPMCard = ({runningData}) => {
 
@@ -17,7 +18,6 @@ const BPMCard = ({runningData}) => {
     function nextWeekRange() {
         setDate(prev => addDays(prev, +7));
     }
-
     function prevWeekRange() {
         setDate(prev => addDays(prev, -7));
     }
@@ -39,10 +39,6 @@ const BPMCard = ({runningData}) => {
 
     },[])
 
-    useEffect(() => {
-        setCurrentData(runningData);
-    }, [runningData]);
-
     // Update
     useEffect(() => {
 
@@ -56,6 +52,9 @@ const BPMCard = ({runningData}) => {
         setAverageBPMForRange(getAverageBpmForRange(range.monday,range.sunday,currentData));
 
     },[date, currentData]);
+    useEffect(() => {
+        setCurrentData(runningData);
+    }, [runningData]);
 
     return (
         <div className="heart-graph">

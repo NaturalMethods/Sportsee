@@ -8,11 +8,28 @@ import {
     Tooltip,
     Legend
 } from 'recharts';
-import RoundedBar from "./RoundedBar.jsx";
-import CustomLegend from "./CustomLegend.jsx";
-import "../../css/graphs/KmStatsGraph.css"
+import RoundedBar from "../ChartsElements/RoundedBar.jsx";
+import CustomLegend from "../ChartsElements/CustomLegend.jsx";
 
-import {format2DigitDate} from "../../utils/utils.jsx";
+import {format2DigitDate} from "../../../utils/utils.jsx";
+
+const styles = `
+.customToolTip {
+    position: absolute;
+    align-items: flex-start;
+    justify-content: center;
+
+    width: 120px;
+    height: 82px;
+
+    transform: translate(-50%, -100%);
+    padding: 10px 12px;
+
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background-color: var(--txt-black);
+}
+`;
 
 const CustomToolTip = ({ active, payload, coordinate }) => {
     if (!active || !payload || !payload.length) return null;
@@ -51,6 +68,7 @@ const KmStatsGraph = ({ isAnimationActive, defaultIndex, data}) => {
             data={data}
             margin={{ top: 10 }}
         >
+            <style>{styles}</style>
             <CartesianGrid  horizontal={true}
                             vertical={false}
                             stroke="var(--grey-grid)"

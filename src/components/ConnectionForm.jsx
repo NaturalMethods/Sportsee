@@ -19,7 +19,7 @@ const ConnectionForm = () => {
             localStorage.setItem("token", token.token)
             localStorage.setItem("userId", token.userId)
 
-            navigate("/dashboard")
+            navigate("/Dashboard")
             window.location.reload();
 
             // Récupérer à partir de l'API

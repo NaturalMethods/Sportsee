@@ -5,3 +5,10 @@
     height: 100%;
     gap: 24px;
 }
+.dashboard-graph{
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    gap: 24px;
+
+}

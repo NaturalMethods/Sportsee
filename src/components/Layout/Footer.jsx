@@ -1,6 +1,6 @@
-import "../css/style.css"
-import "../css/footer.css"
-import reducelogo from "../assets/footer/reducelogo.png";
+import "../../css/style.css"
+import "../../css/footer.css"
+import reducelogo from "../../assets/footer/ReduceLogo.png";
 const Footer = () => {
     return (
         <footer className="flex-row footer-container">

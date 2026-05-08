@@ -143,6 +143,45 @@ export function getWeekDuration(start, end, runningData) {
         })
         .reduce((sum, d) => sum + Number(d.duration), 0);
 }
+export function getDuration(runningData) {
+
+    const totalMinutes = runningData
+        .reduce((sum, d) => sum + Number(d.duration), 0);
+
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+
+    return {
+        hours: `${hours}h`,
+        minutes: `${minutes.toString().padStart(2, "0")}min`
+    };
+}
+export function getCaloriesBurnt(runningData) {
+
+    return runningData
+        .reduce((sum, d) => sum + Number(d.caloriesBurned), 0);
+}
+
+export function getNbrOfSessions(runningData) {
+
+    return runningData.length;
+ }
+export function getRestDays(runningData) {
+
+    if (!runningData?.length) return 0;
+
+    const sorted = runningData
+        .map(d => new Date(d.date))
+        .sort((a, b) => a - b);
+
+    const start = sorted[0];
+    const end = sorted[sorted.length - 1];
+
+    const totalDays =
+        Math.floor((end - start) / (1000 * 60 * 60 * 24)) + 1;
+
+    return totalDays - runningData.length;
+}
 
 export function getWeekNbrOfRun(start, end, runningData) {
 

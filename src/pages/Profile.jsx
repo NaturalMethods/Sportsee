@@ -1,7 +1,21 @@
 import "../css/profile.css"
-import {useContext} from "react";
-import {UserContext} from "../context/UserContext.jsx";
+import {useContext, useEffect, useState} from "react";
+import {UserContext} from "../Context/UserContext.jsx";
+import {getProfileData} from "../data/MockService.jsx";
+import {getCaloriesBurnt, getDuration, getNbrOfSessions, getRestDays} from "../utils/utils.jsx";
 const Profile = () => {
+
+    const {runningData } = useContext(UserContext);
+
+    const [runData, setRunningData] = useState([]);
+
+    const [profileData, setProfileData] = useState([]);
+    const [gender, setGender] = useState("");
+    const [height, setHeight] = useState("");
+    const [duration, setDuration] = useState([]);
+    const [calories, setCalories] = useState();
+    const [nbrOfSessions, setNbrOfSessions] = useState();
+    const [restDays, setRestDays] = useState();
 
     const {user} = useContext(UserContext);
 
@@ -12,6 +26,34 @@ const Profile = () => {
             year: "numeric"
         }).format(new Date(user.createdAt))
         : null;
+
+    useEffect(() =>{
+
+        const fetchData = async () => {
+            setProfileData(await getProfileData());
+        }
+        fetchData();
+    }, []);
+
+    useEffect(() =>{
+        setRunningData(runningData);
+
+        setDuration(getDuration(runningData));
+        setCalories(getCaloriesBurnt(runningData));
+        setNbrOfSessions(getNbrOfSessions(runningData));
+        setRestDays(getRestDays(runningData));
+
+    }, [runningData]);
+    useEffect(() =>{
+
+        setHeight(`${Math.floor(profileData.height / 100)}m${profileData.height % 100}`);
+
+        if(profileData.gender==="male"){
+            setGender("Homme");
+        } else if(profileData.gender==="female"){
+            setGender("Femme");
+        }
+    },[profileData]);
 
     return (
         <section className="profile-container flex-row">
@@ -31,10 +73,10 @@ const Profile = () => {
 
                     <div className="profile-infos-title"><h4>Votre profil</h4></div>
                     <div className="profile-infos-number flex-col">
-                        <p className="body-large lightgrey">Âge: </p>
-                        <p className="body-large lightgrey">Genre: </p>
-                        <p className="body-large lightgrey">Taille: </p>
-                        <p className="body-large lightgrey">Poids: </p>
+                        <p className="body-large lightgrey">Âge: {profileData.age} </p>
+                        <p className="body-large lightgrey">Genre: {gender}</p>
+                        <p className="body-large lightgrey">Taille: {height}</p>
+                        <p className="body-large lightgrey">Poids: {profileData.weight}kg</p>
                     </div>
 
                 </section>
@@ -49,14 +91,14 @@ const Profile = () => {
                     <div className="profile-statistics-card flex-col">
                         <p className="body white">Temps total couru</p>
                         <div className="profile-stats flex-row">
-                            <h4 className="white">27h</h4>
-                            <p className="body-large lightblue">15min</p>
+                            <h4 className="white">{duration.hours}</h4>
+                            <p className="body-large lightblue">{duration.minutes}</p>
                         </div>
                     </div>
                     <div className="profile-statistics-card flex-col">
                         <p className="body white">Calories brûlées</p>
                         <div className="profile-stats flex-row">
-                            <h4 className="white">25000</h4>
+                            <h4 className="white">{calories}</h4>
                             <p className="body-large lightblue">cal</p>
                         </div>
                     </div>
@@ -70,14 +112,14 @@ const Profile = () => {
                     <div className="profile-statistics-card flex-col">
                         <p className="body white">Nombre de jour de repos</p>
                         <div className="profile-stats flex-row">
-                            <h4 className="white">9</h4>
+                            <h4 className="white">{restDays}</h4>
                             <p className="body-large lightblue">jours</p>
                         </div>
                     </div>
                     <div className="profile-statistics-card flex-col">
                         <p className="body white">Nombre de sessions</p>
                         <div className="profile-stats flex-row">
-                            <h4 className="white">41</h4>
+                            <h4 className="white">{nbrOfSessions}</h4>
                             <p className="body-large lightblue">sessions</p>
                         </div>
                     </div>

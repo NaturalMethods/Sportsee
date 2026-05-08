@@ -1,9 +1,9 @@
-import KmStatsGraph from "../../graphs/KmStatsGraph.jsx";
+import KmStatsGraph from "../../Charts/CustomCharts/KmStatsGraph.jsx";
 import Arrow from "../../../assets/RightArrow.svg"
 import {useEffect, useState} from "react";
 import {buildWeeklyKmData, formatDateShort, getAverageKmForRange} from "../../../utils/utils.jsx";
 import {addDays} from "../../../utils/date.jsx";
-
+import "../../../css/dashboard/ChartsCard/distanceCard.css"
 
 // Return monday date 4 weeks before and sunday date of current week
 function get4WeekRange(referenceDate = new Date()) {
