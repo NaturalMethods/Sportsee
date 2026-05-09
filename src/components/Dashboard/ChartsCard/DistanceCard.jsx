@@ -1,9 +1,10 @@
 import KmStatsGraph from "../../Charts/CustomCharts/KmStatsGraph.jsx";
 import Arrow from "../../../assets/RightArrow.svg"
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {buildWeeklyKmData, formatDateShort, getAverageKmForRange} from "../../../utils/utils.jsx";
 import {addDays} from "../../../utils/date.jsx";
 import "../../../css/dashboard/ChartsCard/distanceCard.css"
+import {UserContext} from "../../../Context/UserContext.jsx";
 
 // Return monday date 4 weeks before and sunday date of current week
 function get4WeekRange(referenceDate = new Date()) {
@@ -54,11 +55,34 @@ const DistanceCard = ({runningData}) => {
     const [weeks, setWeeks] = useState([]);
     const [kmData, setKmData] = useState([]);
 
-    function next4WeekRange() {
-        setDate(prev => addDays(prev, 28));
+    const {user} = useContext(UserContext);
+
+    function next4WeekRange(minDate, maxDate) {
+
+        setDate(prev => {
+
+            const nextDate = addDays(prev, 28);
+
+            // bornes
+            if (nextDate < minDate || nextDate > maxDate) {
+                return prev;
+            }
+
+            return nextDate;
+        });
     }
-    function prev4WeekRange() {
-        setDate(prev => addDays(prev, -28));
+    function prev4WeekRange(minDate, maxDate) {
+
+        setDate(prev => {
+
+            const prevDate = addDays(prev, -28);
+
+            if (prevDate < minDate || prevDate > maxDate) {
+                return prev;
+            }
+
+            return prevDate;
+        });
     }
 
     // Init
@@ -104,11 +128,11 @@ const DistanceCard = ({runningData}) => {
                 <div className="km-title-container flex-row">
                     <h4 className="blue">{averageKmForRange}km en moyenne</h4>
                     <div className="km-graph-selector flex-row ">
-                        <div onClick={prev4WeekRange} className="arrow-container-selector flip flex-col">
+                        <div onClick={() =>prev4WeekRange(new Date(user.createdAt),new Date())} className="arrow-container-selector flip flex-col">
                             <img src={Arrow} alt="flèche de gauche" />
                         </div>
                         <p className="body-small">{formatDateShort(start)} - {formatDateShort(end)}</p>
-                        <div onClick={next4WeekRange} className="arrow-container-selector flex-col">
+                        <div onClick={() =>next4WeekRange(new Date(user.createdAt),new Date())} className="arrow-container-selector flex-col">
                             <img src={Arrow} alt="flèche de droite" />
                         </div>
 

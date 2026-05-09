@@ -1,13 +1,14 @@
 import "../css/profile.css"
 import {useContext, useEffect, useState} from "react";
 import {UserContext} from "../Context/UserContext.jsx";
-import {getProfileData} from "../data/MockService.jsx";
+import DataService from "../service/DataService";
 import {getCaloriesBurnt, getDuration, getNbrOfSessions, getRestDays} from "../utils/utils.jsx";
+import Loader from "../components/Loader.jsx";
 const Profile = () => {
 
     const {runningData } = useContext(UserContext);
 
-    const [runData, setRunningData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const [profileData, setProfileData] = useState([]);
     const [gender, setGender] = useState("");
@@ -16,6 +17,8 @@ const Profile = () => {
     const [calories, setCalories] = useState();
     const [nbrOfSessions, setNbrOfSessions] = useState();
     const [restDays, setRestDays] = useState();
+
+    const MIN_LOADING_TIME = 350; // ms
 
     const {user} = useContext(UserContext);
 
@@ -27,16 +30,39 @@ const Profile = () => {
         }).format(new Date(user.createdAt))
         : null;
 
-    useEffect(() =>{
+    useEffect(() => {
 
         const fetchData = async () => {
-            setProfileData(await getProfileData());
-        }
+
+            const startTime = Date.now();
+
+            try {
+
+                setLoading(true);
+
+                const data = await DataService.getProfileData();
+                setProfileData(data);
+
+            } catch (e) {
+                console.error(e);
+            } finally {
+
+                const elapsed = Date.now() - startTime;
+                const remaining = MIN_LOADING_TIME - elapsed;
+
+                if (remaining > 0) {
+                    setTimeout(() => setLoading(false), remaining);
+                } else {
+                    setLoading(false);
+                }
+            }
+        };
+
         fetchData();
+
     }, []);
 
     useEffect(() =>{
-        setRunningData(runningData);
 
         setDuration(getDuration(runningData));
         setCalories(getCaloriesBurnt(runningData));
@@ -54,6 +80,14 @@ const Profile = () => {
             setGender("Femme");
         }
     },[profileData]);
+
+    if (
+        loading ||
+        !user ||
+        !runningData
+    ) {
+        return <Loader />;
+    }
 
     return (
         <section className="profile-container flex-row">
@@ -105,7 +139,7 @@ const Profile = () => {
                     <div className="profile-statistics-card flex-col">
                         <p className="body white">Distance totale parcourue</p>
                         <div className="profile-stats flex-row">
-                            <h4 className="white">{user?.totaleDistance}</h4>
+                            <h4 className="white">{user?.totalDistance}</h4>
                             <p className="body-large lightblue">km</p>
                         </div>
                     </div>

@@ -1,9 +1,10 @@
 import Arrow from "../../../assets/RightArrow.svg"
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {buildWeeklyHeartRateData, formatDateShort, getAverageBpmForRange, getWeekRange} from "../../../utils/utils.jsx";
 import {addDays} from "../../../utils/date.jsx";
 import HeartStatsGraph from "../../Charts/CustomCharts/HeartStatsGraph.jsx";
 import "../../../css/dashboard/ChartsCard/BPMCard.css"
+import {UserContext} from "../../../Context/UserContext.jsx";
 
 const BPMCard = ({runningData}) => {
 
@@ -15,11 +16,34 @@ const BPMCard = ({runningData}) => {
     const [bpmData, setBpmData] = useState([]);
     const [averageBPMForRange, setAverageBPMForRange] = useState();
 
-    function nextWeekRange() {
-        setDate(prev => addDays(prev, +7));
+    const {user} = useContext(UserContext);
+
+    function nextWeekRange(minDate, maxDate) {
+
+        setDate(prev => {
+
+            const nextDate = addDays(prev, 7);
+
+            if (nextDate < minDate || nextDate > maxDate) {
+                return prev;
+            }
+
+            return nextDate;
+        });
     }
-    function prevWeekRange() {
-        setDate(prev => addDays(prev, -7));
+
+    function prevWeekRange(minDate, maxDate) {
+
+        setDate(prev => {
+
+            const prevDate = addDays(prev, -7);
+
+            if (prevDate < minDate || prevDate > maxDate) {
+                return prev;
+            }
+
+            return prevDate;
+        });
     }
 
     //Init
@@ -35,7 +59,7 @@ const BPMCard = ({runningData}) => {
 
       setBpmData(buildWeeklyHeartRateData(weekRange.monday,currentData));
 
-        setAverageBPMForRange(getAverageBpmForRange(weekRange.monday,weekRange.sunday,currentData));
+      setAverageBPMForRange(getAverageBpmForRange(weekRange.monday,weekRange.sunday,currentData));
 
     },[])
 
@@ -62,11 +86,11 @@ const BPMCard = ({runningData}) => {
                 <div className="heart-title-container flex-row">
                     <h4 className="red">{averageBPMForRange} BPM</h4>
                     <div className="heart-graph-selector flex-row ">
-                        <div onClick={prevWeekRange} className="arrow-container-selector flip flex-col">
+                        <div onClick={() => prevWeekRange(new Date(user.createdAt), new Date())} className="arrow-container-selector flip flex-col">
                             <img src={Arrow} alt="flèche de gauche" />
                         </div>
                         <p className="body-small">{formatDateShort(start)} - {formatDateShort(end)}</p>
-                        <div onClick={nextWeekRange} className="arrow-container-selector flex-col">
+                        <div onClick={() => nextWeekRange(new Date(user.createdAt), new Date())} className="arrow-container-selector flex-col">
                             <img src={Arrow} alt="flèche de droite" />
                         </div>
 

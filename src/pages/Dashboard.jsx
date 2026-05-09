@@ -2,24 +2,22 @@ import "../css/dashboard/dashboard.css"
 import ProfileSummary from "../components/Dashboard/ProfileSummary.jsx";
 import LastPerformanceCharts from "../components/Dashboard/LastPerformanceCharts.jsx";
 import WeeklyOverview from "../components/Dashboard/WeeklyOverview.jsx";
-import {useContext, useEffect, useState} from "react";
+import {useContext} from "react";
 import {UserContext} from "../Context/UserContext.jsx";
+import Loader from "../components/Loader.jsx";
 
 const Dashboard = () => {
-    const {runningData } = useContext(UserContext);
+    const {runningData, loading } = useContext(UserContext);
 
-    const [runData, setRunningData] = useState([]);
-
-    useEffect(() =>{
-            setRunningData(runningData);
-
-    }, [runningData]);
+    if (loading) {
+        return <Loader />;
+    }
 
     return (
         <section className="flex-col dashboard-section">
-            <ProfileSummary />
-            <LastPerformanceCharts runningData={runData} />
-            <WeeklyOverview runningData={runData} />
+            <ProfileSummary runningData={runningData} />
+            <LastPerformanceCharts runningData={runningData} />
+            <WeeklyOverview runningData={runningData} />
         </section>
     )
 }

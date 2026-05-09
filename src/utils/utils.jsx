@@ -58,7 +58,7 @@ export function getAverageKmForRange(start, end, runningData) {
     if (filtered.length === 0) return 0;
     const total = filtered.reduce((sum, d) => sum + d.distance, 0);
 
-    return Number((total / filtered.length).toFixed(2));
+    return Number((total / filtered.length).toFixed(1));
 }
 
 export function getAverageBpmForRange(start, end, runningData) {
@@ -124,7 +124,7 @@ export function getKmForWeek(start, end, runningData) {
             return date >= normalizedStart &&
                 date <= normalizedEnd;
         })
-        .reduce((sum, d) => sum + Number(d.distance), 0);
+        .reduce((sum, d) => sum + Number(d.distance), 0).toFixed(2);
 }
 
 export function getWeekDuration(start, end, runningData) {
@@ -190,15 +190,14 @@ export function getWeekNbrOfRun(start, end, runningData) {
 
     return runningData
         .filter((d) => {
-
             const date = new Date(d.date);
             return date >= normalizedStart && date <= normalizedEnd;
         })
         .length;
-
 }
 
 export function buildWeeklyHeartRateData(start, runningData) {
+
     const days = ["lun", "mar", "mer", "jeu", "ven", "sam", "dim"];
     const format = (d) => {
         return new Date(d).toISOString().slice(0, 10);

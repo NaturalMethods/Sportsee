@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {getGlobalInfos, getUserInfos} from "../data/MockService";
+import DataService from "../service/DataService";
 import { UserContext } from "./UserContext";
 export const UserProvider = ({ children }) => {
 
@@ -9,27 +9,40 @@ export const UserProvider = ({ children }) => {
 
     useEffect(() => {
 
-        if (localStorage.getItem("token")) {
+        const fetchGlobalInfos = async () => {
 
-            const fetchGlobalInfos = async () => {
+            try {
 
-                try {
-                    const data = await getGlobalInfos();
+                const data = await DataService.getGlobalInfos();
 
-                    setUser(data.userInfos);
-                    setRunningData(data.runningData);
+                const profile = {
+                    firstName: data.profile.firstName,
+                    lastName: data.profile.lastName,
+                    createdAt: data.profile.createdAt,
+                    profilePicture: data.profile.profilePicture,
+                    totalDistance: Math.floor(data.statistics.totalDistance),
+                };
 
-                } catch (err) {
+                setUser(profile);
+                setRunningData(data.runningData);
 
-                    console.error("Erreur fetch global infos:", err);
+            } catch (err) {
 
-                } finally {
+                console.error("Erreur fetch global infos:", err);
 
-                    setLoading(false);
-                }
-            };
+            } finally {
 
+                setLoading(false);
+            }
+        };
+
+        // ⚠️ toujours gérer le cas sans token
+        const token = localStorage.getItem("token");
+
+        if (token) {
             fetchGlobalInfos();
+        } else {
+            setLoading(false);
         }
 
     }, []);

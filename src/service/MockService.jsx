@@ -3,10 +3,9 @@ import data from "./mock.json"
 export const getTokenByAuth = (email,password) => {
     return new Promise((resolve, reject) => {
 
-        console.log(password)
 
         setTimeout(() => {
-            const user = data.find((u) => u.email === email && u.password === password)
+            const user = data.find((u) => u.username === email && u.password === password)
 
             if (user) resolve({
                 token:"token123",
@@ -24,12 +23,12 @@ export const getGlobalInfos = async () => {
     ]);
 
     return {
-        userInfos,
+        profile: userInfos.profile,
+        statistics: userInfos.statistics,
         runningData
     };
-}
+};
 export const getUserInfos = () => {
-    //const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
     return new Promise((resolve, reject) => {
 
@@ -37,12 +36,16 @@ export const getUserInfos = () => {
             const user = data.find((u) => u.id === userId);
 
             if (user) resolve({
-                firstName: user.userInfos.firstName,
-                lastName: user.userInfos.lastName,
-                createdAt: user.userInfos.createdAt,
-                profilePicture: user.userInfos.profilePicture,
-                totaleDistance: user.statistics.totalDistance
-            })
+                profile: {
+                    firstName: user.userInfos.firstName,
+                    lastName: user.userInfos.lastName,
+                    createdAt: user.userInfos.createdAt,
+                    profilePicture: user.userInfos.profilePicture,
+                },
+
+                statistics: {
+                    totalDistance: user.statistics?.totalDistance ?? 0
+                }})
             else reject("User not found")
         }, 500)
     })
@@ -70,7 +73,7 @@ export const getWeeklyGoal = () => {
         setTimeout(() => {
             const user = data.find((u) => u.id === userId);
 
-            if (user) resolve( user.weeklyGoal)
+            if (user) resolve( user.goal)
             else reject("User not found")
         }, 500)
     })

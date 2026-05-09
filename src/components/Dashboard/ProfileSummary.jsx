@@ -16,7 +16,6 @@ const ProfileSummary = () => {
         }).format(new Date(user.createdAt))
         : null;
 
-
     return (
 
         <section className="headerprofile flex-row">
@@ -32,7 +31,7 @@ const ProfileSummary = () => {
                 <label className="body lightgrey distance-label">Distance parcourue totale</label>
                 <div className="distance-rectangle flex-row">
                     <img className="outline" src={outline} alt="flag icon" />
-                    <h4 className="white totale-distance">{user?.totaleDistance} km</h4>
+                    <h4 className="white totale-distance">{user?.totalDistance} km</h4>
                 </div>
 
             </div>

@@ -5,7 +5,7 @@ import HebdoRunPieChart from "../Charts/CustomCharts/HebdoRunPieChart.jsx";
 import {useEffect, useState} from "react";
 import {getKmForWeek, getWeekDuration, getWeekNbrOfRun, getWeekRange} from "../../utils/utils.jsx";
 import { format4DigitDate} from "../../utils/date.jsx";
-import {getWeeklyGoal} from "../../data/MockService.jsx";
+import DataService from "../../service/DataService";
 const WeeklyOverview = ({runningData}) => {
 
     const [start, setStartWeekRange] = useState(new Date());
@@ -15,7 +15,7 @@ const WeeklyOverview = ({runningData}) => {
     const [duration, setDuration] = useState();
     const [distance, setDistance] = useState();
 
-    const [weeklyGoal, setWeeklyGoal] = useState(0);
+    const [weeklyGoal, setWeeklyGoal] = useState(6);
 
 
 
@@ -35,7 +35,8 @@ const WeeklyOverview = ({runningData}) => {
 
     useEffect(() => {
         const fetchWeeklyGoal = async () => {
-            const week = await getWeeklyGoal();
+            const week = await DataService.getWeeklyGoal();
+
             setWeeklyGoal(week);
         };
         fetchWeeklyGoal()

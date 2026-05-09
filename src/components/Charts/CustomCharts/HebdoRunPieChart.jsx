@@ -3,6 +3,8 @@ import { PieChart, Pie, Cell } from "recharts";
 const COLORS = ["#0B23F4", "#B6BDFC"];
 
 export default function HebdoRunPieChart({nbrOfRun = 0 ,weeklyGoal = 0 }) {
+
+    console.log("hebdoRunPieChart", nbrOfRun);
     const goal = weeklyGoal;
     const done = nbrOfRun;
 
@@ -12,60 +14,48 @@ export default function HebdoRunPieChart({nbrOfRun = 0 ,weeklyGoal = 0 }) {
     ];
 
     const renderLabel = (props) => {
-        const {
-            cx,
-            cy,
-            midAngle,
-            outerRadius,
-            index,
-            name,
-            value
-        } = props;
+        const { cx, cy, midAngle, outerRadius, name, value, index } = props;
 
         const RADIAN = Math.PI / 180;
-        const radius = outerRadius + 15;
+        const radius = outerRadius + 10;
 
-        let offsetX = 0;
-        let offsetY = 0;
+        const x = cx + radius * Math.cos(-midAngle * RADIAN);
+        const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-        // 🎯 uniquement pour "réalisées"
-        if (index === 0) {
-            offsetX = -80;
-            offsetY = -30;
-        }
+        const isRightSide = x > cx;
 
-        const x = cx + radius * Math.cos(-midAngle * RADIAN) + offsetX;
-        const y = cy + radius * Math.sin(-midAngle * RADIAN) + offsetY;
+        const textX = isRightSide ? x + 8 : x - 8;
+        const textAnchor = isRightSide ? "start" : "end";
 
         return (
             <g>
-                {/* petit rond couleur */}
-                <circle
-                    cx={x - 8}
-                    cy={y-2}
-                    r={4}
-                    fill={COLORS[index]}
-                />
-
                 {/* texte */}
                 <text
-                    x={x}
+                    x={textX}
                     y={y}
-                    fill="#707070"
-                    fontFamily= "Inter, sans-serif"
-                    fontStyle= "normal"
-                    fontWeight= "400"
-                    fontSize= {10}
+                    textAnchor={textAnchor}
                     dominantBaseline="middle"
+                    fontSize={10}
+                    fill="#707070"
+                    fontFamily="Inter, sans-serif"
                 >
                     {value} {name}
                 </text>
+
+                {/* rond toujours à gauche du texte */}
+                <circle
+                    cx={isRightSide ? x : x - 70}
+                    cy={y}
+                    r={4}
+                    fill={COLORS[index]}
+                />
             </g>
         );
     };
 
     return (
-        <PieChart width={306} height={200}>
+        <PieChart width={350} height={200} margin={{ top: 20, right: 80, left: 80, bottom: 20 }}>
+
             <Pie
                 data={data}
                 dataKey="value"

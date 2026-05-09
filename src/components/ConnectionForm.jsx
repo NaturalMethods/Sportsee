@@ -1,6 +1,6 @@
 import {useState} from "react"
 import "../css/style.css"
-import {getTokenByAuth} from "../data/MockService.jsx";
+import DataService from "../service/DataService";
 import { useNavigate } from "react-router-dom"
 
 const ConnectionForm = () => {
@@ -10,12 +10,12 @@ const ConnectionForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault() // empêche le refresh de page
-        console.log(email, password)
 
         try {
             // Récupérer à partir des données mockées
-            const token = await getTokenByAuth(email, password);
-            console.log(token)
+
+            const token = await DataService.getTokenByAuth(email, password);
+
             localStorage.setItem("token", token.token)
             localStorage.setItem("userId", token.userId)
 
@@ -30,9 +30,9 @@ const ConnectionForm = () => {
                     },
                     body: JSON.stringify({ email, password }),
                 });
-             const data = await response.json();
+             const service = await response.json();
 
-             localStorage.setItem("token", data.token);
+             localStorage.setItem("token", service.token);
              */
 
 
@@ -51,7 +51,7 @@ const ConnectionForm = () => {
 
             <div className="input-section flex-col">
                 <label className="body lightgrey left-align">Adresse email</label>
-                <input className="input-form body" type="email" value={email}
+                <input className="input-form body" type="text" value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
             </div>

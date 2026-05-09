@@ -20,7 +20,6 @@
     gap: 170px;
     justify-content: space-between;
     align-items: center;
-
     width: 100%;
 
 }
@@ -30,9 +29,8 @@
     align-items: center;
     padding: 14px 4px;
     gap: 3px;
-
     margin: 0 auto;
-    width: 156px;
+    width: 170px;
     height: 52px;
 
     border-radius: 10px;

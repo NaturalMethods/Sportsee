@@ -1,7 +1,7 @@
 [
   {
     "id": "user123",
-    "weeklyGoal": 2,
+    "goal": 2,
     "userInfos": {
       "firstName": "Sophie",
       "lastName": "Martin",
