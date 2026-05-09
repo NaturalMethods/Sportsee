@@ -10,7 +10,13 @@ import {
 import RoundedBar from "../ChartsElements/RoundedBar.jsx";
 import CustomLegend from "../ChartsElements/CustomLegend.jsx";
 
-
+/**
+ * Return a heartrate charts with rounded bars
+ * @param param0
+ * @param param0.data
+ * @returns {React.JSX.Element}
+ * @constructor
+ */
 const HeartStatsGraph = ({data}) => {
 
     const barColor = "var(--txt-red)";

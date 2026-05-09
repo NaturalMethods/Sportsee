@@ -11,8 +11,13 @@ import {
 import RoundedBar from "../ChartsElements/RoundedBar.jsx";
 import CustomLegend from "../ChartsElements/CustomLegend.jsx";
 
-import {format2DigitDate} from "../../../utils/utils.jsx";
+import {format2DigitDate} from "../../../utils/date.jsx";
 
+
+/**
+ * Style CSS for custom tool tip
+ * @type {string}
+ */
 const styles = `
 .customToolTip {
     position: absolute;
@@ -31,6 +36,15 @@ const styles = `
 }
 `;
 
+/**
+ * Custom tooltip for the KMStatsGraph which display date range and km for a rounded bar week
+ * @param param0
+ * @param param0.active
+ * @param param0.payload
+ * @param param0.coordinate
+ * @returns {React.JSX.Element|null}
+ * @constructor
+ */
 const CustomToolTip = ({ active, payload, coordinate }) => {
     if (!active || !payload || !payload.length) return null;
 
@@ -55,6 +69,15 @@ const CustomToolTip = ({ active, payload, coordinate }) => {
     );
 };
 
+/**
+ * Return a chart with a 4 weeks range, rounded bars and a custom tooltip
+ * @param param0
+ * @param param0.isAnimationActive
+ * @param param0.defaultIndex
+ * @param param0.data
+ * @returns {React.JSX.Element}
+ * @constructor
+ */
 const KmStatsGraph = ({ isAnimationActive, defaultIndex, data}) => {
 
     const barColor = "var(--bar-color)";

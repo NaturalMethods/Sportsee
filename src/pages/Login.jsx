@@ -5,6 +5,11 @@ import login from "../assets/login.jpg"
 
 import logo from "../assets/logo.svg"
 
+/**
+ * Return login page with a connection form
+ * @returns {React.JSX.Element}
+ * @constructor
+ */
 const Login = () => {
     return (
 

@@ -1,11 +1,18 @@
 import Arrow from "../../../assets/RightArrow.svg"
 import {useContext, useEffect, useState} from "react";
-import {buildWeeklyHeartRateData, formatDateShort, getAverageBpmForRange, getWeekRange} from "../../../utils/utils.jsx";
-import {addDays} from "../../../utils/date.jsx";
+import {buildWeeklyHeartRateData, getAverageBpmForRange, getWeekRange} from "../../../utils/utils.jsx";
+import {addDays,formatDateShort} from "../../../utils/date.jsx";
 import HeartStatsGraph from "../../Charts/CustomCharts/HeartStatsGraph.jsx";
 import "../../../css/dashboard/ChartsCard/BPMCard.css"
 import {UserContext} from "../../../Context/UserContext.jsx";
 
+/**
+ * Return a container with a title(average BPM on the week), the heart rate charts, and cursor to change range
+ * @param param0
+ * @param param0.runningData
+ * @returns {React.JSX.Element}
+ * @constructor
+ */
 const BPMCard = ({runningData}) => {
 
     const [currentData, setCurrentData] = useState([]);

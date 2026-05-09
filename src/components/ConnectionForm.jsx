@@ -3,6 +3,11 @@ import "../css/style.css"
 import DataService from "../service/DataService";
 import { useNavigate } from "react-router-dom"
 
+/**
+ * Return the connection form display on / and fetch the token with infos from the user
+ * @returns {React.JSX.Element}
+ * @constructor
+ */
 const ConnectionForm = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -12,7 +17,6 @@ const ConnectionForm = () => {
         e.preventDefault() // empêche le refresh de page
 
         try {
-            // Récupérer à partir des données mockées
 
             const token = await DataService.getTokenByAuth(email, password);
 
@@ -21,21 +25,6 @@ const ConnectionForm = () => {
 
             navigate("/Dashboard")
             window.location.reload();
-
-            // Récupérer à partir de l'API
-            /* const response = await fetch("http://localhost:8000/api/login", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ email, password }),
-                });
-             const service = await response.json();
-
-             localStorage.setItem("token", service.token);
-             */
-
-
 
         } catch (err) {
             console.error(err)

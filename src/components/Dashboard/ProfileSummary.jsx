@@ -5,6 +5,11 @@ import "../../css/style.css"
 import "../../css/dashboard/Section/profileSummary.css"
 import outline from "../../assets/OUTLINE.svg";
 
+/**
+ * Return a header which summarize the user profile and totale run distance
+ * @returns {React.JSX.Element}
+ * @constructor
+ */
 const ProfileSummary = () => {
     const {user} = useContext(UserContext);
 

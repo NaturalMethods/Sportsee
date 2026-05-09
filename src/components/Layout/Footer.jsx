@@ -1,6 +1,12 @@
 import "../../css/style.css"
 import "../../css/footer.css"
 import reducelogo from "../../assets/footer/ReduceLogo.png";
+
+/**
+ * Return the footer of page
+ * @returns {React.JSX.Element}
+ * @constructor
+ */
 const Footer = () => {
     return (
         <footer className="flex-row footer-container">

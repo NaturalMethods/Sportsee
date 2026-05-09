@@ -1,4 +1,3 @@
-
 import { NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../Context/UserContext.jsx";
@@ -6,6 +5,12 @@ import { UserContext } from "../../Context/UserContext.jsx";
 
 import "../../css/header.css"
 import logo from "../../assets/Logo.svg"
+
+/**
+ * Return the header containing the navigation bar
+ * @returns {React.JSX.Element}
+ * @constructor
+ */
 const Header = () => {
     const navigate = useNavigate();
     const { setUser } = useContext(UserContext);

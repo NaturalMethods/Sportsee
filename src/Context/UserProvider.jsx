@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import DataService from "../service/DataService";
 import { UserContext } from "./UserContext";
+
+/**
+ * Provide the userContext containing multiples userinfos and totaleDistance and user running data
+ * @param param0
+ * @param param0.children
+ * @returns {React.JSX.Element}
+ * @constructor
+ */
 export const UserProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);

@@ -1,7 +1,13 @@
 import "../../../css/ChartsElements/CustomLegend.css"
 
+/**
+ * Custom legend for KM Charts
+ * @param props
+ * @returns {React.JSX.Element|null}
+ * @constructor
+ */
 const CustomLegend = (props) => {
-    let { payload, isHovered, barColorHovered } = props;
+    let {payload, isHovered, barColorHovered} = props;
 
     if (!payload || payload.length === 0) return null;
 

@@ -1,12 +1,16 @@
 import KmStatsGraph from "../../Charts/CustomCharts/KmStatsGraph.jsx";
 import Arrow from "../../../assets/RightArrow.svg"
 import {useContext, useEffect, useState} from "react";
-import {buildWeeklyKmData, formatDateShort, getAverageKmForRange} from "../../../utils/utils.jsx";
-import {addDays} from "../../../utils/date.jsx";
+import {buildWeeklyKmData, getAverageKmForRange} from "../../../utils/utils.jsx";
+import {addDays, formatDateShort} from "../../../utils/date.jsx";
 import "../../../css/dashboard/ChartsCard/distanceCard.css"
 import {UserContext} from "../../../Context/UserContext.jsx";
 
-// Return monday date 4 weeks before and sunday date of current week
+/**
+ * Return a 4 week range, first monday (start) to last sunday (end) and each week start and end
+ * @param referenceDate
+ * @returns {{start: *, end: *, weeks: *[]}}
+ */
 function get4WeekRange(referenceDate = new Date()) {
     const date = new Date(referenceDate);
 
@@ -44,6 +48,13 @@ function get4WeekRange(referenceDate = new Date()) {
     };
 }
 
+/**
+ * Return a container with a title(average km on 4 weeks), a cursor to change range and km charts on 4 weeks
+ * @param param0
+ * @param param0.runningData
+ * @returns {React.JSX.Element}
+ * @constructor
+ */
 const DistanceCard = ({runningData}) => {
 
     const [currentData, setCurrentData] = useState([]);

@@ -1,5 +1,11 @@
 import data from "./mock.json"
 
+/**
+ * Simulate getting token (from the API) with mock datas
+ * @param email
+ * @param password
+ * @returns {Promise<unknown>}
+ */
 export const getTokenByAuth = (email,password) => {
     return new Promise((resolve, reject) => {
 
@@ -15,6 +21,11 @@ export const getTokenByAuth = (email,password) => {
         }, 500)
     })
 }
+
+/**
+ * Return a formatted datas from the mock datas (user and running datas)
+ * @returns {Promise<{profile: *, statistics: {totalDistance}|*, runningData: unknown extends (object & {then(onfulfilled: infer F, ...args: infer _): any}) ? (F extends ((value: infer V, ...args: infer _) => any) ? Awaited<V> : never) : unknown}>}
+ */
 export const getGlobalInfos = async () => {
 
     const [userInfos, runningData] = await Promise.all([
@@ -28,6 +39,11 @@ export const getGlobalInfos = async () => {
         runningData
     };
 };
+
+/**
+ * Return userInfos to be saved in the context
+ * @returns {Promise<unknown>}
+ */
 export const getUserInfos = () => {
     const userId = localStorage.getItem("userId");
     return new Promise((resolve, reject) => {
@@ -51,6 +67,10 @@ export const getUserInfos = () => {
     })
 }
 
+/**
+ * Return user running data
+ * @returns {Promise<unknown>}
+ */
 export const getRunningData = () => {
 
     const userId = localStorage.getItem("userId");
@@ -65,6 +85,11 @@ export const getRunningData = () => {
     })
 
 }
+
+/**
+ * Return weekly goal of the user
+ * @returns {Promise<unknown>}
+ */
 export const getWeeklyGoal = () => {
 
     const userId = localStorage.getItem("userId");
@@ -79,6 +104,11 @@ export const getWeeklyGoal = () => {
     })
 
 }
+
+/**
+ * Return datas from the mock datas to be displayed on the profile page
+ * @returns {Promise<unknown>}
+ */
 export const getProfileData = () => {
 
     const userId = localStorage.getItem("userId");

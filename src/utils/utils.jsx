@@ -1,36 +1,8 @@
-
-// utils/date.js
-export function addDays(date, days) {
-    const d = new Date(date);
-    d.setDate(d.getDate() + days);
-    return d;
-}
-
-
-// Return a short date format (ex: 27 avr)
-export function formatDateShort(date) {
-    if (!date) return null;
-
-    return new Intl.DateTimeFormat("fr-FR", {
-        day: "numeric",
-        month: "short",
-    })
-        .format(new Date(date))
-        .replace(".", "");
-}
-export function format2DigitDate(date) {
-    if (!date) return "";
-
-    return new Intl.DateTimeFormat("fr-FR", {
-        day: "2-digit",
-        month: "2-digit",
-    }).format(new Date(date))
-        .replace("/", ".");
-}
-
-
-
-// Return current week monday date and sunday date
+/**
+ * Return monday and sunday date of the week
+ * @param date
+ * @returns {{monday: Date, sunday: Date}}
+ */
 export function getWeekRange(date = new Date()) {
     const d = new Date(date);
 
@@ -49,6 +21,13 @@ export function getWeekRange(date = new Date()) {
     };
 }
 
+/**
+ * Return average km for the range of 4 weeks
+ * @param start
+ * @param end
+ * @param runningData
+ * @returns {number}
+ */
 export function getAverageKmForRange(start, end, runningData) {
 
     const filtered = runningData.filter((d) => {
@@ -61,6 +40,13 @@ export function getAverageKmForRange(start, end, runningData) {
     return Number((total / filtered.length).toFixed(1));
 }
 
+/**
+ * Return the average heart rate for the range (a week)
+ * @param start
+ * @param end
+ * @param runningData
+ * @returns {number}
+ */
 export function getAverageBpmForRange(start, end, runningData) {
 
     const normalizedStart = startOfDay(start);
@@ -87,6 +73,12 @@ export function getAverageBpmForRange(start, end, runningData) {
     return Math.round(total / filtered.length);
 }
 
+/**
+ * Return running data corresponding to the range date
+ * @param weeks
+ * @param runningData
+ * @returns {*}
+ */
 export function buildWeeklyKmData(weeks,runningData) {
 
     return weeks.map((w, i) => ({
@@ -97,19 +89,35 @@ export function buildWeeklyKmData(weeks,runningData) {
     }));
 }
 
+/**
+ * Return the start of the day for the date
+ * @param date
+ * @returns {Date}
+ */
 export function startOfDay(date) {
     const d = new Date(date);
     d.setHours(0, 0, 0, 0);
     return d;
 }
 
+/**
+ * Return the end of the day for the date
+ * @param date
+ * @returns {Date}
+ */
 export function endOfDay(date) {
     const d = new Date(date);
     d.setHours(23, 59, 59, 999);
     return d;
 }
 
-// Calcule la somme des Kms de la semaine
+/**
+ * Return sum of the km for a week
+ * @param start
+ * @param end
+ * @param runningData
+ * @returns {string}
+ */
 export function getKmForWeek(start, end, runningData) {
 
     const normalizedStart = startOfDay(start);
@@ -127,6 +135,13 @@ export function getKmForWeek(start, end, runningData) {
         .reduce((sum, d) => sum + Number(d.distance), 0).toFixed(2);
 }
 
+/**
+ * Return sum of duration activity for the week
+ * @param start
+ * @param end
+ * @param runningData
+ * @returns {*}
+ */
 export function getWeekDuration(start, end, runningData) {
 
     const normalizedStart = startOfDay(start);
@@ -143,6 +158,12 @@ export function getWeekDuration(start, end, runningData) {
         })
         .reduce((sum, d) => sum + Number(d.duration), 0);
 }
+
+/**
+ * Return the total duration of activities of all runs
+ * @param runningData
+ * @returns {{hours: string, minutes: string}}
+ */
 export function getDuration(runningData) {
 
     const totalMinutes = runningData
@@ -156,16 +177,33 @@ export function getDuration(runningData) {
         minutes: `${minutes.toString().padStart(2, "0")}min`
     };
 }
+
+/**
+ * Return total calories burnt
+ * @param runningData
+ * @returns {*}
+ */
 export function getCaloriesBurnt(runningData) {
 
     return runningData
         .reduce((sum, d) => sum + Number(d.caloriesBurned), 0);
 }
 
+/**
+ * Return total session of running
+ * @param runningData
+ * @returns {*}
+ */
 export function getNbrOfSessions(runningData) {
 
     return runningData.length;
  }
+
+/**
+ * Return total of rest days from the account creation
+ * @param runningData
+ * @returns {number}
+ */
 export function getRestDays(runningData) {
 
     if (!runningData?.length) return 0;
@@ -183,6 +221,13 @@ export function getRestDays(runningData) {
     return totalDays - runningData.length;
 }
 
+/**
+ * Return the number of run of the week
+ * @param start
+ * @param end
+ * @param runningData
+ * @returns {*}
+ */
 export function getWeekNbrOfRun(start, end, runningData) {
 
     const normalizedStart = startOfDay(start);
@@ -196,6 +241,12 @@ export function getWeekNbrOfRun(start, end, runningData) {
         .length;
 }
 
+/**
+ * Return heartrate data for the week
+ * @param start
+ * @param runningData
+ * @returns {{name: *, minbpm, maxbpm}[]}
+ */
 export function buildWeeklyHeartRateData(start, runningData) {
 
     const days = ["lun", "mar", "mer", "jeu", "ven", "sam", "dim"];

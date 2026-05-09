@@ -2,6 +2,14 @@ import { PieChart, Pie, Cell } from "recharts";
 
 const COLORS = ["#0B23F4", "#B6BDFC"];
 
+/**
+ * Return a pie chart with run to be done and run already done
+ * @param param0
+ * @param param0.nbrOfRun
+ * @param param0.weeklyGoal
+ * @returns {React.JSX.Element}
+ * @constructor
+ */
 export default function HebdoRunPieChart({nbrOfRun = 0 ,weeklyGoal = 0 }) {
 
     console.log("hebdoRunPieChart", nbrOfRun);

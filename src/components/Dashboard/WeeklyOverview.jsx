@@ -1,4 +1,3 @@
-
 import "../../css/style.css"
 import "../../css/dashboard/Section/weeklyOverview.css"
 import HebdoRunPieChart from "../Charts/CustomCharts/HebdoRunPieChart.jsx";
@@ -6,6 +5,14 @@ import {useEffect, useState} from "react";
 import {getKmForWeek, getWeekDuration, getWeekNbrOfRun, getWeekRange} from "../../utils/utils.jsx";
 import { format4DigitDate} from "../../utils/date.jsx";
 import DataService from "../../service/DataService";
+
+/**
+ * Return a container with a run goal pie chart, total minutes and km run on the current week
+ * @param param0
+ * @param param0.runningData
+ * @returns {React.JSX.Element}
+ * @constructor
+ */
 const WeeklyOverview = ({runningData}) => {
 
     const [start, setStartWeekRange] = useState(new Date());

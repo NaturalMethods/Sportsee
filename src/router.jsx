@@ -1,4 +1,3 @@
-
 import {Routes, Route } from "react-router-dom"
 
 import Layout from "./Layouts/Layout"
@@ -7,9 +6,13 @@ import Login from "./pages/Login.jsx"
 import Dashboard from "./pages/Dashboard"
 import ProtectedLayout from "./Layouts/ProtectedLayout.jsx";
 import Error404 from "./pages/Error404.jsx";
-import {UserProvider} from "./Context/UserProvider.jsx";
 import Profile from "./pages/Profile.jsx";
 
+/**
+ * Router for the application with protectRoute and layout
+ * @returns {React.JSX.Element}
+ * @constructor
+ */
 const Router = () => {
     return (
 

@@ -4,6 +4,12 @@ import {UserContext} from "../Context/UserContext.jsx";
 import DataService from "../service/DataService";
 import {getCaloriesBurnt, getDuration, getNbrOfSessions, getRestDays} from "../utils/utils.jsx";
 import Loader from "../components/Loader.jsx";
+
+/**
+ * Return profile page containing user profile
+ * @returns {React.JSX.Element}
+ * @constructor
+ */
 const Profile = () => {
 
     const {runningData } = useContext(UserContext);
