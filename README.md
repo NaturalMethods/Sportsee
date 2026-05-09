@@ -1,16 +1,29 @@
-# React + Vite
+# SportSee
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repo contains all the source code to run the front end for the sports analytics dashboard SportSee.
 
-Currently, two official plugins are available:
+## 1. Launching the project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Fork the repository
+- Clone it on your computer.
+- Run :  
+  - nmp install" in the project directory
+  - npm run dev
 
-## React Compiler
+## 2. Authentication
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The API uses JWT (JSON Web Token) authentication. To access the endpoints:
+Look in the service/mock.json to get a valid username and password.
 
-## Expanding the ESLint configuration
+### 3. Available Users
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Currently, the API has three demo users:
+
+- username: `sophiemartin`, password: `password123`
+- username: `emmaleroy`, password: `password789`
+- username: `marcdubois`, password: `password456`
+
+#### Notes
+- All dates should be in ISO format (YYYY-MM-DD)
+- All distances are in kilometers
+- All durations are in minutes
