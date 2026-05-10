@@ -12,7 +12,6 @@ const COLORS = ["#0B23F4", "#B6BDFC"];
  */
 export default function HebdoRunPieChart({nbrOfRun = 0 ,weeklyGoal = 0 }) {
 
-    console.log("hebdoRunPieChart", nbrOfRun);
     const goal = weeklyGoal;
     const done = nbrOfRun;
 

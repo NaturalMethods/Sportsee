@@ -6,7 +6,7 @@ import * as ApiService from "./APIService";
  * Dynamic import to switch between MOCK Data and API Data
  * @type {boolean}
  */
-const USE_MOCK = true;
+const USE_MOCK = false;
 
 const service = USE_MOCK
     ? MockService
